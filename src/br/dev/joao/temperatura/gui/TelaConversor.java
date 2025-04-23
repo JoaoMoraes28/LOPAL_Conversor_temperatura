@@ -1,6 +1,8 @@
 package br.dev.joao.temperatura.gui;
 
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,6 +49,26 @@ public class TelaConversor {
 		buttonKelvin.setText("KELVIN");
 		buttonKelvin.setBounds(255, 90, 215, 30);
 		
+		//Criando JLabel labelResultado
+		labelResultado = new JLabel();
+		labelResultado.setText("123");
+		labelResultado.setBounds(185, 140, 215, 40);
+		
+		//Criando JLabel labelMensagemErro
+		labelMensagemErro = new JLabel();
+		labelMensagemErro.setText("ERROR");
+		labelMensagemErro.setBounds(60, 210, 100, 40);
+		
+		//Criando a funcao ao botao Fahreinheit
+		buttonFahreinheit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		
 		//Adicionando os elementos a tela
 		Container container = tela.getContentPane();
 		
@@ -54,8 +76,8 @@ public class TelaConversor {
 		container.add(textCelsius);
 		container.add(buttonKelvin);
 		container.add(buttonFahreinheit);
-		
-		
+		container.add(labelResultado);
+		container.add(labelMensagemErro);
 		
 		
 		

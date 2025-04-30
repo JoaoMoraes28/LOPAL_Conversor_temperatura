@@ -3,11 +3,14 @@ package br.dev.joao.temperatura.gui;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.InputMismatchException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import br.dev.joao.temperatura.model.Temperatura;
 
 public class TelaConversor {
 	
@@ -17,7 +20,6 @@ public class TelaConversor {
 	private JButton buttonKelvin;
 	private JButton buttonFahreinheit;
 	private JLabel labelResultado;
-	private JLabel labelMensagemErro;
 	
 	
 	public void criarTelaConversor() {
@@ -51,13 +53,8 @@ public class TelaConversor {
 		
 		//Criando JLabel labelResultado
 		labelResultado = new JLabel();
-		labelResultado.setText("123");
+		labelResultado.setText("");
 		labelResultado.setBounds(185, 140, 215, 40);
-		
-		//Criando JLabel labelMensagemErro
-		labelMensagemErro = new JLabel();
-		labelMensagemErro.setText("ERROR");
-		labelMensagemErro.setBounds(60, 210, 100, 40);
 		
 		//Criando a funcao ao botao Fahreinheit
 		buttonFahreinheit.addActionListener(new ActionListener() {
@@ -65,7 +62,61 @@ public class TelaConversor {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				Temperatura temperatura = new Temperatura();
 				
+				double temperaturaDouble = 0;
+				
+				try {
+					
+					temperaturaDouble = Double.parseDouble(textCelsius.getText());
+					
+					temperatura.setCelsius(temperaturaDouble);
+					
+					temperatura.converterParaFahreinheit();
+					
+					String resultado = Double.toString(temperatura.getCelsius());
+					
+					resultado = resultado.replace(".", ",");
+					
+					labelResultado.setText(resultado + " FAHREINHEIT");
+					
+				} catch (Exception e1) {
+					
+					labelResultado.setText("Valor fornecido esta incorreto! Tente novamente");
+				}
+				
+				
+			}
+		});
+		
+		buttonKelvin.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Temperatura temperatura = new Temperatura();
+				double temperaturaDouble = 0;
+				
+				try {
+					
+					temperaturaDouble = Double.parseDouble(textCelsius.getText());
+
+					temperatura.setCelsius(temperaturaDouble);
+					
+					temperatura.converterParaKelvin();
+					
+					String resultado = Double.toString(temperatura.getCelsius());
+					
+					resultado = resultado.replace(".", ",");
+					
+					labelResultado.setText(resultado + " KELVIN");
+					
+				} catch (Exception e2) {
+					
+					labelResultado.setText("Valor fornecido esta incorreto! Tente novamente");
+				}
+				
+			
 			}
 		});
 		
@@ -77,24 +128,6 @@ public class TelaConversor {
 		container.add(buttonKelvin);
 		container.add(buttonFahreinheit);
 		container.add(labelResultado);
-		container.add(labelMensagemErro);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
